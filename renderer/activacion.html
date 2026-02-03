@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self';"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Academia de Baile | Activación</title>
+
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="./assets/bootstrap/bootstrap-icons/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="./assets/styles.css" />
+  </head>
+
+  <body class="login neon">
+    <script src="./assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <div class="container d-flex align-items-center justify-content-center min-vh-100">
+      <div class="login-card" style="max-width: 720px;">
+        <div class="text-center mb-4">
+          <img src="./assets/img/LOGOEXRMORADO.png" class="img-fluid" alt="..." />
+          <h1 class="brand-title mt-4">Activación</h1>
+          <p class="muted">Licencia 100% offline · Venta por meses</p>
+        </div>
+
+        <div id="msg"></div>
+
+        <div class="mb-3">
+          <label class="form-label">ID de este equipo (Machine ID)</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-pc-display"></i></span>
+            <input id="machineId" class="form-control" readonly />
+            <button class="btn btn-outline-light" id="btnCopy" type="button">
+              <i class="bi bi-clipboard"></i>
+            </button>
+          </div>
+          <div class="form-text text-white-50 mt-2">
+            Envíale este ID al vendedor para que te genere la licencia para este PC.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Token / Licencia</label>
+          <textarea
+            id="token"
+            class="form-control"
+            rows="5"
+            placeholder="Pega aquí la licencia (token)"
+          ></textarea>
+        </div>
+
+        <button class="btn btn-login w-100" id="btnActivate">
+          <i class="bi bi-unlock"></i> Activar
+        </button>
+
+        <div class="d-flex gap-2 mt-3">
+          <button class="btn btn-outline-light w-100" id="btnRefresh" type="button">
+            <i class="bi bi-arrow-clockwise"></i> Revalidar
+          </button>
+          <button class="btn btn-outline-light w-100" id="btnExit" type="button">
+            <i class="bi bi-box-arrow-right"></i> Salir
+          </button>
+        </div>
+
+        <div class="muted text-center mt-4 small" id="statusHint"></div>
+      </div>
+    </div>
+
+    <script src="./js/activacion.js"></script>
+  </body>
+</html>

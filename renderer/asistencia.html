@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self';"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Asistencia</title>
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/bootstrap/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./assets/styles.css" />
+  </head>
+  <body class="app-bg">
+    <script src="./assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <div class="navbar">
+      <div class="container">
+        <div>
+          <img src="./assets/img/LOGOEXRMORADO.png" class="img-dom" width="100px" alt="...">
+         <!-- <div class="brand">Academia</div>-->
+        </div>
+        <div class="actions">
+          <button class="btn btn-outline btn-sm" data-nav="dashboard">
+            Inicio
+          </button>
+          <button class="btn btn-outline btn-sm" data-nav="alumnos">
+            Alumnos
+          </button>
+          <button class="btn btn-outline btn-sm" data-nav="profesores">
+            Profesores
+          </button>
+          <button class="btn btn-outline btn-sm" data-nav="clases">
+            Clases
+          </button>
+          <button class="btn btn-primary btn-sm" data-nav="asistencia">
+            Asistencia
+          </button>
+          <button class="btn btn-outline btn-sm" data-nav="pagos">Pagos</button>
+          <span class="badge" id="sessionBadge">Sesión</span>
+          <button class="btn btn-outline btn-sm" id="btnLogout">Salir</button>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="card">
+        <div class="card-body">
+          <div class="brand">Registrar entrada</div>
+          <div class="muted">Selecciona clase y persona.</div>
+          <div class="spacer"></div>
+
+          <div class="row">
+            <div class="col-6">
+              <label>Fecha</label><input id="fecha" type="date" />
+            </div>
+            <div class="col-6">
+              <label>Clase</label
+              ><select id="clase_id"></select>
+            </div>
+
+            <div class="col-6">
+              <label>Tipo</label>
+              <select id="tipo">
+                <option value="alumno">Alumnos</option>
+                <option value="profesor">Profesores</option>
+              </select>
+            </div>
+            <div class="col-6 position-relative">
+              <label>Persona</label>
+
+              <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-search"></i></span>
+                <input
+                  type="text"
+                  id="personaSearch"
+                  class="form-control"
+                  placeholder="Buscar persona..."
+                  autocomplete="off"
+                />
+              </div>
+
+              <div
+                id="personaDropdown"
+                class="list-group position-absolute w-100 d-none"
+                style="z-index: 1000; max-height: 220px; overflow: auto"
+              ></div>
+
+              <input type="hidden" id="persona_id" />
+            </div>
+
+            <div class="col-6">
+              <label>Hora entrada (opcional)</label>
+              <input id="hora_entrada" placeholder="HH:MM (vacío = actual)" />
+            </div>
+            <div class="col-6">
+              <label>Notas</label><input id="notas" placeholder="Opcional" />
+            </div>
+          </div>
+
+          <div class="spacer"></div>
+          <div id="msg"></div>
+          <div class="actions">
+            <button class="btn btn-primary" id="btnCheckin">
+              Registrar entrada
+            </button>
+            <button class="btn btn-outline" id="btnRefresh">Actualizar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="spacer"></div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="brand">Registros</div>
+          <div class="muted">Entrada/Salida para fecha/clase seleccionada.</div>
+          <div class="spacer"></div>
+          <div style="overflow: auto">
+            <table class="table table-striped table-hover" id="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Persona</th>
+                  <th>Tipo</th>
+                  <th>Clase</th>
+                  <th>Fecha</th>
+                  <th>Entrada</th>
+                  <th>Salida</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./js/common.js"></script>
+    <script src="./js/shell.js"></script>
+    <script src="./js/role-guard.js"></script>
+    <script src="./js/asistencia.js"></script>
+  </body>
+</html>

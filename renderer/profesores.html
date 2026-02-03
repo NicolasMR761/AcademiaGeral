@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self';"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Profesores</title>
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/bootstrap/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./assets/styles.css" />
+  </head>
+  <body class="app-bg">
+    <script src="./assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <div class="navbar">
+      <div class="container">
+        <div>
+          <img src="./assets/img/LOGOEXRMORADO.png" class="img-dom" width="100px" alt="...">
+         <!-- <div class="brand">Academia</div>-->
+        </div>
+        <div class="actions">
+          <button class="btn btn-outline btn-sm" data-nav="dashboard">Inicio</button>
+          <button class="btn btn-outline btn-sm" data-nav="alumnos">Alumnos</button>
+          <button class="btn btn-primary btn-sm" data-nav="profesores">Profesores
+          <button class="btn btn-outline btn-sm" data-nav="clases">Clases</button>
+          <button class="btn btn-outline btn-sm" data-nav="asistencia">Asistencia</button>
+          <button class="btn btn-outline btn-sm" data-nav="pagos">Pagos</button>
+          <span class="badge" id="sessionBadge">Sesión</span
+          ><button class="btn btn-outline btn-sm" id="btnLogout">Salir</button>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      
+      <div class="card">
+        <div class="card-body">
+          <div class="brand">Nuevo / Editar Profesor</div>
+          <div class="muted">Obligatorio: Nombre y Apellido.</div>
+          <div class="spacer"></div>
+          <form id="form">
+            <input type="hidden" id="id" />
+            <div class="row">
+              <div class="col-6">
+                <label>Nombre *</label><input id="nombre" required />
+              </div>
+              <div class="col-6">
+                <label>Apellido *</label><input id="apellido" required />
+              </div>
+              <div class="col-6">
+                <label>Documento</label><input id="documento" type="number" step="1" />
+              </div>
+              <div class="col-6">
+                <label>Teléfono</label><input id="telefono" type="number" step="1" />
+              </div>
+              <div class="col-6"><label>Email</label><input id="email" /></div>
+              <div class="col-6">
+                <label>Estado</label
+                ><select id="estado">
+                  <option value="activo">Activo</option>
+                  <option value="inactivo">Inactivo</option>
+                </select>
+              </div>
+              <div class="mt-2" id="msg"></div>
+            </div>
+            <div class="spacer"></div>
+            <div class="actions">
+              <button type="button" class="btn btn-outline" id="btnCancel">
+                Cancelar</button
+              ><button class="btn btn-primary">Guardar</button>
+            </div>
+          </form>
+        </div>
+        
+      </div>
+
+      <div class="spacer"></div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="actions" style="justify-content: space-between">
+            <div>
+              <div class="brand">Listado</div>
+              <div class="muted">Buscar, editar o eliminar.</div>
+            </div>
+            <input
+              id="search"
+              placeholder="Buscar..."
+              style="max-width: 320px"
+            />
+          </div>
+          <div class="spacer"></div>
+          <div style="overflow: auto">
+            <table class="table table-striped table-hover" id="table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Contacto</th>
+                  <th>Estado</th>
+                  <th>Registro</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    <script src="./js/common.js"></script>
+    <script src="./js/shell.js"></script>
+    <script src="./js/role-guard.js"></script>
+    <script src="./js/profesores.js"></script>
+  </body>
+</html>

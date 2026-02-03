@@ -1,0 +1,51 @@
+{
+  "name": "academia-baile-desktop",
+  "version": "1.0.1",
+  "description": "AcademiaERX",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "postinstall": "electron-rebuild -f -w better-sqlite3",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "build": "electron-builder",
+    "license:keys": "node tools/create_keys.js",
+    "license:gen": "node tools/generate_license.js"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^30.0.0",
+    "electron-builder": "^26.4.0",
+    "electron-rebuild": "^3.2.9"
+  },
+  "dependencies": {
+    "@capacitor-community/sqlite": "^7.0.3",
+    "better-sqlite3": "^11.5.0",
+    "bootstrap-icons": "^1.13.1",
+    "xlsx": "^0.18.5"
+  },
+  "build": {
+    "appId": "com.academia.baile",
+    "productName": "AcademiaDeBaile",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*"
+    ],
+    "win": {
+      "icon": "assets/icon.ico",
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "installerIcon": "assets/icon.ico",
+      "uninstallerIcon": "assets/icon.ico"
+    }
+  }
+}

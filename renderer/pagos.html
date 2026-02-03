@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self';"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pagos</title>
+
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="./assets/bootstrap/bootstrap-icons/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="./assets/styles.css" />
+  </head>
+  <body class="app-bg">
+    <div class="navbar">
+      <div class="container">
+        <div>
+          <img
+            src="./assets/img/LOGOEXRMORADO.png"
+            class="img-dom"
+            width="100px"
+            alt="..."
+          />
+          <!-- <div class="brand">Academia</div>-->
+        </div>
+        <div class="actions">
+          <button class="btn btn-outline btn-sm" data-nav="dashboard">
+            Inicio
+          </button>
+          <button class="btn btn-outline btn-sm" data-nav="alumnos">
+            Alumnos
+          </button>
+          <button class="btn btn-outline btn-sm" data-nav="profesores">
+            Profesores
+          </button>
+          <button class="btn btn-outline btn-sm" data-nav="clases">
+            Clases
+          </button>
+          <button class="btn btn-outline btn-sm" data-nav="asistencia">
+            Asistencia
+          </button>
+          <button class="btn btn-primary btn-sm" data-nav="pagos">Pagos</button>
+          <span class="badge" id="sessionBadge">Sesión</span>
+          <button class="btn btn-outline btn-sm" id="btnLogout">Salir</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="card">
+        <div class="card-body">
+          <div class="brand">Registrar pago</div>
+          <div class="muted">
+            Pagos por día, semana o mes para alumnos y profesores.
+          </div>
+          <div class="spacer"></div>
+
+          <div class="row">
+            <div class="col-6">
+              <label>Tipo</label>
+              <select id="tipo_persona">
+                <option value="alumno">Alumno</option>
+                <option value="profesor">Profesor</option>
+              </select>
+            </div>
+
+            <!-- Buscador persona -->
+            <div class="col-6 position-relative">
+              <label>Persona</label>
+              <div class="input-group">
+                <span class="input-group-text"
+                  ><i class="bi bi-search"></i
+                ></span>
+                <input
+                  id="personaSearch"
+                  class="form-control"
+                  placeholder="Buscar persona..."
+                  autocomplete="off"
+                />
+              </div>
+
+              <div
+                id="personaDropdown"
+                class="list-group position-absolute w-100 d-none"
+                style="z-index: 1000; max-height: 240px; overflow: auto"
+              ></div>
+
+              <!-- ✅ aquí queda el ID real seleccionado -->
+              <input type="hidden" id="persona_id" />
+            </div>
+
+            <div class="col-6">
+              <label>Periodicidad *</label>
+              <select id="periodicidad" class="form-select">
+                <option value="dia">Día</option>
+                <option value="semana">Semana</option>
+                <option value="mes">Mes</option>
+              </select>
+            </div>
+
+            <div class="col-6">
+              <label>Fecha pago *</label>
+              <input id="fecha_pago" type="date" />
+            </div>
+
+            <div class="col-6">
+              <label>Monto *</label>
+              <input
+                id="monto"
+                type="text"
+                inputmode="numeric"
+                placeholder="Ej: 5.000"
+              />
+            </div>
+
+            <div class="col-6">
+              <label>Método (opcional)</label>
+              <input
+                id="metodo"
+                placeholder="Efectivo / Transferencia / Nequi..."
+              />
+            </div>
+
+            <div class="col-12">
+              <label>Notas (opcional)</label>
+              <input id="notas" placeholder="Opcional" />
+            </div>
+            <div class="mt-2" id="msg"></div>
+          </div>
+
+          <div class="spacer"></div>
+          <div class="actions">
+            <button class="btn btn-primary" id="btnGuardar">
+              Guardar pago
+            </button>
+            <button class="btn btn-outline" id="btnRefrescar">
+              Actualizar
+            </button>
+            <button class="btn btn-outline-success btn-sm" id="btnExcel">
+              <i class="bi bi-filetype-xlsx me-1"></i>Excel
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="spacer"></div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="row mt-3" style="justify-content: space-between">
+            <div class="col-md-5 col-5">
+              <div class="brand">Historial</div>
+              <div class="muted">Filtra por rango de fechas.</div>
+            </div>
+            <div class="col-5 col-md-5">
+              <div>Desde<input id="desde" type="date" /></div>
+              <div>Hasta<input id="hasta" type="date" /></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-12" style="text-align: right">
+              <button class="btn btn-outline mt-2" id="btnFiltrar">
+                Filtrar
+              </button>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-12 col-md-12" style="text-align: right">
+              <span class="muted" id="count"></span>
+              <span class="muted" id="totalMonto"></span>
+            </div>
+          </div>
+
+          <div class="spacer"></div>
+
+          <div style="overflow: auto">
+            <table class="table table-striped table-hover" id="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Fecha</th>
+                  <th>Tipo</th>
+                  <th>Persona</th>
+                  <th>Periodicidad</th>
+                  <th>Monto</th>
+                  <th>Método</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="./js/common.js"></script>
+    <script src="./js/shell.js"></script>
+    <script src="./js/role-guard.js"></script>
+    <script src="./js/pagos.js"></script>
+  </body>
+</html>

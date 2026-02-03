@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self';"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Inicio</title>
+
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="./assets/bootstrap/bootstrap-icons/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="./assets/styles.css" />
+  </head>
+
+  <body class="app-bg">
+    <!-- NAVBAR -->
+    <div class="navbar">
+      <div class="container">
+        <div>
+          <img
+            src="./assets/img/LOGOEXRMORADO.png"
+            class="img-dom logo-neon"
+            width="100px"
+            alt="..."
+          />
+          <!-- <div class="brand">Academia</div>-->
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary btn-sm" data-nav="dashboard">
+            Inicio
+          </button>
+
+          <button class="btn btn-outline btn-sm" data-nav="alumnos">
+            Alumnos
+          </button>
+
+          <button class="btn btn-outline btn-sm" data-nav="profesores">
+            Profesores
+          </button>
+
+          <button class="btn btn-outline btn-sm" data-nav="clases">
+            Clases
+          </button>
+
+          <button class="btn btn-outline btn-sm" data-nav="asistencia">
+            Asistencia
+          </button>
+
+          <button class="btn btn-outline btn-sm" data-nav="pagos">Pagos</button>
+
+          <span class="badge" id="sessionBadge">Sesión</span>
+
+          <button class="btn btn-outline btn-sm" id="btnLogout">Salir</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTENIDO -->
+    <div class="container">
+      <!-- BIENVENIDA 
+      <div class="card">
+        <div class="card-body">
+          <div class="brand">Bienvenido ✅</div>
+          <div class="muted">
+            Ya tienes Login + CRUD de Alumnos y Profesores.
+          </div>
+
+          <div class="spacer"></div>
+
+          <div class="alert">Siguiente: Clases + Asistencia + Pagos.</div>
+        </div>
+      </div>*-->
+
+      <div class="spacer"></div>
+
+      <!-- REPORTE -->
+      <div class="card">
+        <div class="card-body">
+          <div class="brand">Reporte de asistencias</div>
+          <div class="muted">
+            Filtra por rango de fechas para ver un reporte amplio.
+          </div>
+
+          <div class="spacer"></div>
+
+          <div class="row">
+            <div class="col-6">
+              <label>Desde</label>
+              <input id="rep_desde" type="date" />
+            </div>
+
+            <div class="col-6">
+              <label>Hasta</label>
+              <input id="rep_hasta" type="date" />
+            </div>
+
+            <div class="col-6">
+              <label>Tipo</label>
+              <select id="rep_tipo">
+                <option value="">Todos</option>
+                <option value="alumno">Alumnos</option>
+                <option value="profesor">Profesores</option>
+              </select>
+            </div>
+
+            <div class="col-6">
+              <label>Clase</label>
+              <select id="rep_clase"></select>
+            </div>
+          </div>
+
+          <div class="spacer"></div>
+
+          <div class="actions">
+            <button class="btn btn-primary" id="btnRep">Generar reporte</button>
+
+            <button class="btn btn-outline" id="btnRepHoy">Hoy</button>
+
+            <button class="btn btn-outline-success btn-sm" id="btnRepExcel">
+              <i class="bi bi-filetype-xlsx me-1"></i>
+              Excel
+            </button>
+
+            <span class="muted" id="repCount"></span>
+          </div>
+
+          <div class="spacer"></div>
+
+          <div style="overflow: auto">
+            <table class="table table-striped table-hover" id="repTable">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Fecha</th>
+                  <th>Tipo</th>
+                  <th>Persona</th>
+                  <th>Clase</th>
+                  <th>Entrada</th>
+                  <th>Salida</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCRIPTS (UNA SOLA VEZ) -->
+    <script src="./js/common.js"></script>
+    <script src="./js/shell.js"></script>
+    <script src="./js/role-guard.js"></script>
+    <script src="./js/dashboard.js"></script>
+  </body>
+</html>
